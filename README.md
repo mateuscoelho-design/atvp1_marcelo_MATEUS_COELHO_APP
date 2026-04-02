@@ -2,23 +2,25 @@
 
 ## Integrantes
 
-* Mateus Graçadio Coelho RA: 25000217
+* Mateus Graçadio Coelho – RA: 25000217
 
 ---
 
 ## Descrição do Projeto
 
-Este projeto consiste no desenvolvimento de um aplicativo mobile em Flutter com fluxo de autenticação simulada, contendo telas de Splash, Login, Cadastro e Home.
-Os dados dos usuários são armazenados em memória utilizando uma estrutura mockada (List), sem uso de banco de dados ou API externa.
+Este projeto consiste no desenvolvimento de um aplicativo mobile utilizando Flutter, com fluxo de autenticação simulada. A aplicação possui as telas de Splash, Login, Cadastro e Home.
+
+Os dados dos usuários são armazenados em memória por meio de uma estrutura mockada utilizando List, sem uso de banco de dados ou API externa.
 
 ---
 
 ## Objetivo
 
-O objetivo do projeto é aplicar os conceitos de:
+O objetivo do projeto é aplicar os conceitos fundamentais de desenvolvimento mobile, incluindo:
 
 * Navegação entre telas
-* Formulários e validação
+* Construção de formulários
+* Validação de dados
 * Organização arquitetural
 * Uso de Model
 * Manipulação de dados em memória
@@ -27,7 +29,7 @@ O objetivo do projeto é aplicar os conceitos de:
 
 ## Arquitetura Utilizada
 
-O projeto segue uma estrutura organizada baseada na separação de responsabilidades:
+O projeto foi estruturado com base na separação de responsabilidades, conforme trabalhado em aula:
 
 ```
 lib/
@@ -55,119 +57,166 @@ lib/
 └── main.dart
 ```
 
-### Explicação
+### Explicação da Arquitetura
 
-* **views** → responsáveis pela interface (telas)
-* **models** → representam os dados (UserModel)
-* **data (store)** → simula armazenamento em memória (UserStore)
+* Views: responsáveis pela interface do usuário (telas)
+* Models: representam os dados da aplicação (UserModel)
+* Data (Store): responsável pelo armazenamento em memória (UserStore)
 
-A lógica de autenticação não fica diretamente na interface, garantindo melhor organização do código.
+A lógica de autenticação foi separada da interface, garantindo melhor organização e manutenção do código.
+
+---
+
+## Uso de Model
+
+Foi implementado o model `UserModel`, responsável por representar os dados do usuário:
+
+* Nome
+* Email
+* Senha
+
+Arquivo:
+features/auth/model/user_model.dart
 
 ---
 
 ## Dados Mockados
 
-O projeto utiliza uma lista em memória:
+O armazenamento de dados é realizado em memória através de uma lista:
 
 ```dart
 static final List<UserModel> _users = [];
 ```
 
-Essa lista simula um banco de dados, permitindo:
+Essa estrutura simula um banco de dados durante a execução do aplicativo, permitindo:
 
-* cadastro de usuários
-* validação de login
+* Cadastro de usuários
+* Validação de login
+* Controle do usuário autenticado
+
+---
+
+## Navegação
+
+A navegação do aplicativo é realizada por rotas nomeadas definidas no arquivo `app_widget.dart`.
+
+Rotas utilizadas:
+
+* / → Splash
+* /login → Login
+* /register → Cadastro
+* /home → Home
 
 ---
 
 ## Fluxo da Aplicação
 
-### 1️⃣ Splash Screen
+### 1. Splash Screen
 
-* Primeira tela exibida
-* Apresenta layout com Container, Column e Row
-* Após alguns segundos, navega automaticamente para o login
+* Primeira tela exibida ao abrir o aplicativo
+* Utiliza Container, Column e Row para construção da interface
+* Após alguns segundos, navega automaticamente para a tela de Login
 
 ---
 
-### 2️⃣ Tela de Login
+### 2. Tela de Login
 
 * Campos:
 
   * Email
   * Senha
-* Botão de entrar
-* Botão para cadastro
 
-🔍 Funcionalidade:
+* Botão de login
+
+* Botão para acessar o cadastro
+
+Funcionalidade:
 
 * Verifica se o usuário existe na lista mockada
-* Se válido → navega para Home
+* Se válido → navega para a Home
 * Se inválido → exibe mensagem de erro
 
 ---
 
-### 3️⃣ Tela de Cadastro
+### 3. Tela de Cadastro
 
 * Campos:
 
   * Nome
   * Email
   * Senha
-* Botão de cadastrar
 
-💾 Funcionalidade:
+* Botão de cadastro
+
+Funcionalidade:
 
 * Cria um objeto `UserModel`
-* Armazena na lista mockada (`UserStore`)
+* Armazena o usuário na lista mockada (`UserStore`)
 * Exibe mensagem de sucesso
-* Retorna para o login
+* Retorna para a tela de login
 
 ---
 
-### 4️⃣ Retorno ao Login
+### 4. Retorno ao Login
 
-Após o cadastro, o usuário volta para a tela de login para autenticação.
-
----
-
-### 5️⃣ Autenticação
-
-* O sistema compara email e senha com os dados salvos
-* Caso válido, salva o usuário atual na memória
+Após o cadastro, o usuário é redirecionado para a tela de Login para realizar a autenticação.
 
 ---
 
-### 6️⃣ Tela Home
+### 5. Autenticação
+
+* O sistema compara email e senha com os dados armazenados
+* Caso válido, o usuário é salvo como usuário atual
+
+---
+
+### 6. Tela Home
 
 * Exibe:
 
   * Ícone centralizado
   * Texto centralizado
-* Mostra o nome do usuário logado
+
+* Apresenta o nome do usuário logado
 
 Exemplo:
 
 ```
 Olá Mateus,
-O App ainda está em desenvolvimento
+O App do Mateus ainda está em desenvolvimento :/
 ```
+
+---
+
+## Validação de Formulários
+
+Foram utilizados:
+
+* Form
+* TextFormField
+* Validators
+
+Validações implementadas:
+
+* Campos obrigatórios
+* Formato de email válido
+* Senha com tamanho mínimo
 
 ---
 
 ## Demonstração
 
-**Vídeo de demonstração do funcionamento:**
+Vídeo demonstrando o funcionamento da aplicação:
 
-https://drive.google.com/file/d/1vMLFOhqPyv_4GJTgEgRzNDj7g4f4cmKW/view?usp=sharing
+https://drive.google.com/file/d/1sGCDo0nq9pI3C_pQpeRYKGHO-AM29-dD/view?usp=sharing
 
-O vídeo demonstra o fluxo completo:
+Fluxo apresentado:
 
 * Splash
 * Login
 * Cadastro
-* Retorno ao login
-* Login válido
+* Retorno ao Login
+* Autenticação válida
 * Navegação para Home
 
 ---
@@ -181,24 +230,26 @@ O vídeo demonstra o fluxo completo:
 
 ## Requisitos Atendidos
 
-✔ Splash Screen com navegação automática
-✔ Tela de Login com validação
-✔ Tela de Cadastro com armazenamento em memória
-✔ Uso de Model (UserModel)
-✔ Dados mockados com List
-✔ Navegação entre telas
-✔ Tela Home com conteúdo centralizado
-✔ Organização em pastas
-✔ Separação de responsabilidades
+* Splash Screen com navegação automática
+* Tela de Login com validação
+* Tela de Cadastro com armazenamento em memória
+* Uso de Model (UserModel)
+* Dados mockados com List
+* Navegação por rotas
+* Tela Home com conteúdo centralizado
+* Organização em pastas
+* Separação de responsabilidades
 
 ---
 
 ## Considerações Finais
 
-Este projeto não utiliza autenticação real, tendo como objetivo demonstrar domínio dos conceitos fundamentais de desenvolvimento mobile com Flutter, incluindo estruturação de projeto, navegação, formulários e manipulação de dados em memória.
+O projeto atende aos requisitos propostos e demonstra o funcionamento de um fluxo completo de autenticação simulada utilizando dados em memória.
+
+O foco principal foi a aplicação dos conceitos de organização arquitetural, navegação, formulários e manipulação de dados, sem a utilização de banco de dados ou serviços externos.
 
 ---
 
 ## Repositório
 
-> (Inserir link do GitHub aqui)
+https://github.com/mateuscoelho-design/atvp1_marcelo_MATEUS_COELHO_APP.git
