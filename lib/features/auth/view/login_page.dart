@@ -9,16 +9,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // chave do formulário (necessária para validação com TextFormField)
+  final _formKey = GlobalKey<FormState>();
+
   // captura os textos digitados nos campos
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   // função para realizar o login
   void login() {
+    // valida todos os campos do formulário antes de continuar
+    if (!_formKey.currentState!.validate()) return;
+
     // chama o método login passando email e senha
     final user = UserStore.login(emailController.text, passwordController.text);
 
-    // se encontrar un perfil válido navega para a tela home
+    // se encontrar um perfil válido navega para a tela home
     if (user != null) {
       Navigator.pushReplacementNamed(context, '/home');
 
@@ -35,35 +41,57 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       // barra superior com título centralizado
       appBar: AppBar(title: const Text('Login'), centerTitle: true),
+
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            // campo de entrada para o email do usuário
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
 
-            // campo de entrada para a senha do usuário - texto oculto
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Senha'),
-            ),
-            const SizedBox(height: 20),
+                // validação do campo de email
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Digite o email';
+                  }
+                  return null;
+                },
+              ),
 
-            // botão que executa a função de login
-            ElevatedButton(onPressed: login, child: const Text('Entrar')),
+              TextFormField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(labelText: 'Senha'),
 
-            // botão para navegar até a tela de registro
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/register');
-              },
-              child: const Text('Criar conta'),
-            ),
-          ],
+                // validação do campo de senha
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Digite a senha';
+                  }
+                  if (value.length < 3) {
+                    return 'Senha muito curta';
+                  }
+                  return null;
+                },
+              ),
+
+              const SizedBox(height: 20),
+
+              // botão que executa a função de login
+              ElevatedButton(onPressed: login, child: const Text('Entrar')),
+
+              // botão para navegar até a tela de registro
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                child: const Text('Criar conta'),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,20 +1,19 @@
-# 📱 Projeto Flutter – Splash, Login e Cadastro com Dados Mockados
+# Projeto Flutter – Splash, Login e Cadastro com Dados Mockados
 
-## 👨‍💻 Integrantes
+## Integrantes
 
-* Mateus Graçadio Coelho
+* Mateus Graçadio Coelho RA: 25000217
 
 ---
 
-## 📌 Descrição do Projeto
+## Descrição do Projeto
 
 Este projeto consiste no desenvolvimento de um aplicativo mobile em Flutter com fluxo de autenticação simulada, contendo telas de Splash, Login, Cadastro e Home.
-
 Os dados dos usuários são armazenados em memória utilizando uma estrutura mockada (List), sem uso de banco de dados ou API externa.
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 O objetivo do projeto é aplicar os conceitos de:
 
@@ -26,21 +25,18 @@ O objetivo do projeto é aplicar os conceitos de:
 
 ---
 
-## 🏗️ Arquitetura Utilizada
+## Arquitetura Utilizada
 
 O projeto segue uma estrutura organizada baseada na separação de responsabilidades:
 
 ```
 lib/
 ├── app/
+│   ├── app_widget.dart
 │   └── data/
 │       └── user_store.dart
 │
 ├── features/
-│   ├── splash/
-│   │   └── view/
-│   │       └── splash_page.dart
-│   │
 │   ├── auth/
 │   │   ├── model/
 │   │   │   └── user_model.dart
@@ -48,15 +44,18 @@ lib/
 │   │       ├── login_page.dart
 │   │       └── register_page.dart
 │   │
-│   └── home/
+│   ├── home/
+│   │   └── view/
+│   │       └── home_page.dart
+│   │
+│   └── splash/
 │       └── view/
-│           └── home_page.dart
+│           └── splash_page.dart
 │
-├── app_widget.dart
 └── main.dart
 ```
 
-### 📌 Explicação
+### Explicação
 
 * **views** → responsáveis pela interface (telas)
 * **models** → representam os dados (UserModel)
@@ -66,7 +65,7 @@ A lógica de autenticação não fica diretamente na interface, garantindo melho
 
 ---
 
-## 💾 Dados Mockados
+## Dados Mockados
 
 O projeto utiliza uma lista em memória:
 
@@ -81,7 +80,7 @@ Essa lista simula um banco de dados, permitindo:
 
 ---
 
-## 🔄 Fluxo da Aplicação
+## Fluxo da Aplicação
 
 ### 1️⃣ Splash Screen
 
@@ -156,11 +155,11 @@ O App ainda está em desenvolvimento
 
 ---
 
-## ▶️ Demonstração
+## Demonstração
 
-📹 **Vídeo de demonstração do funcionamento:**
+**Vídeo de demonstração do funcionamento:**
 
-> (Inserir link do vídeo aqui)
+https://drive.google.com/file/d/1vMLFOhqPyv_4GJTgEgRzNDj7g4f4cmKW/view?usp=sharing
 
 O vídeo demonstra o fluxo completo:
 
@@ -173,14 +172,14 @@ O vídeo demonstra o fluxo completo:
 
 ---
 
-## ⚙️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * Flutter
 * Dart
 
 ---
 
-## ✅ Requisitos Atendidos
+## Requisitos Atendidos
 
 ✔ Splash Screen com navegação automática
 ✔ Tela de Login com validação
@@ -194,12 +193,12 @@ O vídeo demonstra o fluxo completo:
 
 ---
 
-## 🚀 Considerações Finais
+## Considerações Finais
 
 Este projeto não utiliza autenticação real, tendo como objetivo demonstrar domínio dos conceitos fundamentais de desenvolvimento mobile com Flutter, incluindo estruturação de projeto, navegação, formulários e manipulação de dados em memória.
 
 ---
 
-## 🔗 Repositório
+## Repositório
 
 > (Inserir link do GitHub aqui)

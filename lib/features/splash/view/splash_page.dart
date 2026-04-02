@@ -15,6 +15,7 @@ class _SplashPageState extends State<SplashPage> {
 
     // Tempo de exibição da Splash antes de ir para o login
     Future.delayed(const Duration(seconds: 10), () {
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, '/login');
     });
   }
